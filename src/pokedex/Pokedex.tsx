@@ -5,8 +5,15 @@ import { PokemonDetail } from '../pokemon/interfaces/PokemonDetail';
 import { listPokemons, ListPokemonsInterface } from '../pokemon/services/listPokemons';
 import PokedexCard from './components/PokedexCard';
 
+const PageWrapper = styled.div`
+  background-image: url('https://secure.static.tumblr.com/f6a18ac56651ce4f9ca7e0230706a0b6/s5i5nyy/dyXn37osa/tumblr_static_pokemon-clouds_00384079.png');
+  background-size: cover;
+  background-attachment: fixed;
+  min-height: 100vh;
+`;
+
 const PokedexContainer = styled.div`
-  max-width: 600px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 20px;
 `;
@@ -73,42 +80,44 @@ const Pokedex: React.FC = () => {
   }, [searchTerm, pokemons]);
 
   return (
-    <PokedexContainer>
-      <SearchForm>
-        <input
-          type="text"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder="Digite o nome do Pokémon"
-        />
-      </SearchForm>
+    <PageWrapper>
+      <PokedexContainer>
+        <SearchForm>
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="Digite o nome do Pokémon"
+          />
+        </SearchForm>
 
-      {searchTerm ? (
-        searchResults.length > 0 ? (
-          <Grid container spacing={2}>
-            {searchResults.map((pokemon) => (
-              <Grid item xs={12} sm={6} md={4} lg={3} key={pokemon.name}>
-                <PokedexCard pokemon={pokemon} />
-              </Grid>
-            ))}
-          </Grid>
+        {searchTerm ? (
+          searchResults.length > 0 ? (
+            <Grid container spacing={2}>
+              {searchResults.map((pokemon) => (
+                <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={pokemon.name}>
+                  <PokedexCard pokemon={pokemon} />
+                </Grid>
+              ))}
+            </Grid>
+          ) : (
+            <p>Nenhum Pokémon encontrado.</p>
+          )
         ) : (
-          <p>Nenhum Pokémon encontrado.</p>
-        )
-      ) : (
-        pokemons ? (
-          <Grid container spacing={2}>
-            {pokemons.results.map((pokemon) => (
-              <Grid item xs={12} sm={6} md={4} lg={3} key={pokemon.name}>
-                <PokedexCard pokemon={pokemon} />
-              </Grid>
-            ))}
-          </Grid>
-        ) : (
-          <p>Carregando...</p>
-        )
-      )}
-    </PokedexContainer>
+          pokemons ? (
+            <Grid container spacing={2}>
+              {pokemons.results.map((pokemon) => (
+                <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={pokemon.name}>
+                  <PokedexCard pokemon={pokemon} />
+                </Grid>
+              ))}
+            </Grid>
+          ) : (
+            <p>Carregando...</p>
+          )
+        )}
+      </PokedexContainer>
+    </PageWrapper>
   );
 };
 
