@@ -16,6 +16,7 @@ const PokedexContainer = styled.div`
   max-width: 1000px;
   margin: 0 auto;
   padding: 20px;
+  background-color: black;
 `;
 
 const SearchForm = styled.form`
@@ -107,7 +108,7 @@ const Pokedex: React.FC = () => {
           pokemons ? (
             <Grid container spacing={2}>
               {pokemons.results.map((pokemon) => (
-                <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={pokemon.name}>
+                <Grid item xs={6} sm={4} md={3} lg={3} xl={2} key={pokemon.name}>
                   <PokedexCard pokemon={pokemon} />
                 </Grid>
               ))}
